@@ -99,7 +99,7 @@ files:
   - name: src/minesweeper/Field.java
     visible: true
     learner_created: true
-feedback_link: https://hyperskill.org/projects/77/stages/427/implement#comment
+feedback_link: https://hyperskill.org/learn/step/7201#comment
 status: Solved
 feedback:
   message: Congratulations!

@@ -1,7 +1,6 @@
 package minesweeper;
 
 import java.util.*;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -23,18 +22,26 @@ public class Main {
             numberOfMines -= 1;
         }
         field.setMines(mines);
-        field.print();
+//        field.printSecret();
+//
+//        System.out.println("\n\n\n");
+        field.print(false);
 
         // Find mines
         boolean isFinish = false;
         while (!isFinish) {
-           System.out.print("Set/delete mines marks (x and y coordinates): ");
-           String input = scanner.nextLine();
-           int column = Integer.parseInt(input.split(" ")[0]) - 1;
-           int row = Integer.parseInt(input.split(" ")[1]) - 1;
-           isFinish = field.guestMine(row, column);
-           field.print();
+           System.out.print("Set/unset mines marks or claim a cell as free: ");
+           String[] input = scanner.nextLine().split(" ");
+           int column = Integer.parseInt(input[0]) - 1;
+           int row = Integer.parseInt(input[1]) - 1;
+           String mode = input[2];
+           if ("free".equals(mode)) {
+               isFinish = field.setFree(row, column);
+           } else if ("mine".equals(mode)) {
+               isFinish = field.guestMine(row, column);
+           } else  {
+               break;
+           }
         }
-        System.out.println("Congratulations! You found all mines!");
     }
 }

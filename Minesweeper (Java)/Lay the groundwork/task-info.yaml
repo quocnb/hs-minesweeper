@@ -50,7 +50,7 @@ files:
     \ \" +\n                    \"one for mines, one for safe zones.\");\n       \
     \ }\n        \n        return CheckResult.correct();\n    }\n}\n"
     learner_created: false
-feedback_link: https://hyperskill.org/projects/77/stages/426/implement#comment
+feedback_link: https://hyperskill.org/learn/step/7200#comment
 status: Solved
 feedback:
   message: Congratulations!

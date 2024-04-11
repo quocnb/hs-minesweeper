@@ -1,0 +1,73 @@
+<h2>Stack</h2>
+<div class="step-text">
+<p>As you probably remember, a <strong>Stack</strong> is an abstract data type where elements are inserted and removed according to the <strong>last-in-first-out (LIFO)</strong> principle. The simplest real-life example is a stack of books. Only a book placed at the top can be removed at a time, but a new book is always added on the top of the stack.</p>
+<p>In the following example, we illustrate some operations of <code class="language-java">Deque</code> using it as a stack.</p>
+<pre><code class="language-java">Deque&lt;String&gt; stack = new ArrayDeque&lt;&gt;();
+
+stack.offerLast("first");
+stack.offerLast("second");
+stack.offerLast("third");
+
+System.out.println(stack); // [first, second, third]
+
+System.out.println(stack.pollLast()); // third
+System.out.println(stack.pollLast()); // second
+System.out.println(stack.pollLast()); // first
+
+System.out.println(stack.pollLast()); // null</code></pre>
+<p>As you can see, it really works. In addition, the <code class="language-java">ArrayDeque</code> implementation is quite efficient for representing large stacks.</p>
+<p>Let's take a look at different methods that are useful while working with the deque.</p>
+<p> </p>
+<h5 id="push-peek-and-pop-methods">Push, Peek, and Pop methods</h5>
+<p>In the <code class="language-java">push(E e)</code> method, the element is inserted at the beginning of the deque. It corresponds to the <code class="language-java">addFirst()</code> method.</p>
+<pre><code class="language-java">Deque&lt;Integer&gt; deque= new ArrayDeque&lt;&gt;();
+deque.add(1);
+deque.add(2);
+deque.add(3);
+deque.add(4);
+System.out.println(deque);
+deque.push(5);
+System.out.println(deque);
+</code></pre>
+<p>  The output of the following code will be:</p>
+<pre><code class="language-java">[1, 2, 3, 4]
+[5, 1, 2, 3, 4]</code></pre>
+<p>In the <code class="language-java">peek()</code> method, the element that heads the deque is returned but not removed from the deque, or <strong>null </strong>is returned if the deque is empty.</p>
+<pre><code class="language-java">System.out.println(deque.peek());
+</code></pre>
+<p>The result of this code is the following:</p>
+<pre><code class="language-java">5</code></pre>
+<p>In the <code class="language-java">pop()</code> method, the element that heads the deque is returned and removed from the deque. It is equivalent to the <code class="language-java">removeFirst()</code> method.</p>
+<pre><code class="language-java">System.out.println(deque.pop());
+System.out.println(deque);</code></pre>
+<p>Here's what this code will output:</p>
+<pre><code class="language-java">5
+[1, 2, 3, 4]</code></pre>
+
+<h5 id="the-old-stack-class">The old Stack class</h5>
+<p>Sometimes, the old <code class="language-java">Stack&lt;E&gt;</code> class with a more minimalistic API can be found in legacy source code. It doesn't implement the <code class="language-java">Deque</code> or <code class="language-java">Queue</code> interfaces. Here is a simple example.</p>
+<pre><code class="language-java">Stack&lt;String&gt; stack = new Stack&lt;&gt;();
+
+stack.push("first");
+stack.push("second");
+stack.push("third");
+
+System.out.println(stack); // [first, second, third]
+
+System.out.println(stack.pop()); // "third"
+System.out.println(stack.pop()); // "second"
+System.out.println(stack.pop()); // "first"
+
+System.out.println(stack.pop()); // throws EmptyStackException</code></pre>
+<p>The method <code class="language-java">pop()</code> always throws an exception if the stack is empty.</p>
+<p>Do not forget, according to the official Java documentation, it's preferable to use implementations of the <code class="language-java">Deque</code> interface as stacks.</p>
+
+<h5 id="using-deque-instead-of-stack">Using Deque instead of Stack</h5>
+<p>Using the Stack class in a single-threaded environment is inefficient, so it is best to use Deque for the stack as also prescribed by the official documentation. Also, <code class="language-java">Stack</code> is a class and <code class="language-java">Deque</code> is an interface. Where we can inherit only one class but can call multiple interfaces. </p>
+<p>Additionally, stacks and deques have different reverse iteration orders. A deque returns an iterator over the elements in the proper order. The elements will be returned in order from first (head) to last (tail).</p>
+<p> </p>
+<p></p><div class="alert alert-primary"><em><strong>The Standard Class Library</strong></em> provides a <code class="language-java">Stack</code> class, but, according to the Java Doc, a more complete and consistent set of <strong>LIFO</strong> stack operations is provided by the <code class="language-java">Deque</code> interface and its implementations, which should be used in preference to this class. So, it is recommended to use <code class="language-java">Deque</code> for stacks.</div>
+<p> </p>
+<h5 id="conclusion">Conclusion</h5>
+<p>We've considered the Deque, a subtype of the <code class="language-java">Queue</code> interface. It is recommended to use <code class="language-java">Deque</code> for stacks, as it is also prescribed by the official documentation. The <code class="language-java">ArrayDeque</code> implementation is quite efficient for representing large stacks. There are three methods that are quite useful to work with deques: <code class="language-java">pop()</code>, <code class="language-java">peek()</code> and <code class="language-java">push()</code>. Sometimes you can find an old <code class="language-java">Stack</code> class in source code, but it is recommended to avoid it in new code.</p>
+</div>
