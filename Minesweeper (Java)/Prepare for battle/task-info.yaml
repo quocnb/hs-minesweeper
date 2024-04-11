@@ -1,16 +1,5 @@
 type: edu
 files:
-  - name: src/minesweeper/Main.java
-    visible: true
-    text: |
-      package minesweeper;
-      
-      public class Main {
-          public static void main(String[] args) {
-              // write your code here
-          }
-      }
-    learner_created: false
   - name: test/MinesweeperTest.java
     visible: false
     text: |
@@ -515,6 +504,90 @@ files:
           }
       }
     learner_created: false
+  - name: src/minesweeper/Mine.java
+    visible: true
+    text: |
+      package minesweeper;
+      
+      public class Mine {
+          private int row;
+          private int column;
+      
+          public Mine(int row, int column) {
+              this.row = row;
+              this.column = column;
+          }
+      
+          public boolean equals(Mine obj) {
+              return row == obj.row && column == obj.column;
+          }
+      }
+    learner_created: true
+  - name: src/minesweeper/Field.java
+    visible: true
+    text: |
+      package minesweeper;
+      
+      import java.util.List;
+      import java.util.Map;
+      
+      public class Field {
+          final String SAFE = ".";
+          final String MINE = "X";
+          final int FIELD_SIZE = 9;
+          private final int[][] field;
+      
+          public Field() {
+              field = new int[FIELD_SIZE][FIELD_SIZE];
+          }
+      
+          public int getSize() {
+              return FIELD_SIZE;
+          }
+      
+          public void print() {
+              for (int i = 0; i < field.length; i++) {
+                  for (int j = 0; j < field[0].length; j++) {
+                      String text = switch (field[i][j]) {
+                          case 0 -> SAFE;
+                          case 9 -> MINE;
+                          default -> "" + field[i][j];
+                      };
+                      System.out.print(text);
+                  }
+                  System.out.println();
+              }
+          }
+      
+          public void resetMines() {
+              for (int i = 0; i < field.length; i++) {
+                  for (int j = 0; j < field[0].length; j++) {
+                      field[i][j] = 0;
+                  }
+              }
+          }
+      
+          public void setMines(Map<Integer, List<Integer>> mines) {
+              for (int row : mines.keySet()) {
+                  for (int column : mines.get(row)) {
+                      field[row][column] = 9;
+                      updateStepAroundMines(row, column);
+                  }
+              }
+          }
+      
+          public void updateStepAroundMines(int row, int column) {
+              for (int i = Math.max(0, row - 1); i <= Math.min(field.length - 1, row + 1); i++) {
+                  for (int j = Math.max(0, column - 1); j <= Math.min(field.length - 1, column + 1); j++) {
+                      field[i][j] = Math.min(9, field[i][j] + 1);
+                  }
+              }
+          }
+      }
+    learner_created: true
 feedback_link: https://hyperskill.org/projects/77/stages/429/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 11 Apr 2024 05:30:03 UTC"
+record: 4
